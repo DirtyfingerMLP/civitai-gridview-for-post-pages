@@ -20,3 +20,4 @@ Click here to install from UserStyles.world:
 
 #Preview
 
+![civitai-gridview-posts-preview](https://github.com/user-attachments/assets/4988ce90-9d15-41df-ab88-0a54060dfc79)
