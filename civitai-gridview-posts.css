@@ -1,0 +1,114 @@
+/* ==UserStyle==
+@name           Civitai Gridview for Post-Pages
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    This style replaces the film-strip view of the posts page with a grid view.
+@author         DirtyfingerMLP
+==/UserStyle== */
+
+@-moz-document url-prefix("https://civitai.com/posts/") {
+/* * MAIN CONTAINER OVERRIDE
+ * Forces the default narrow container (max-w-[728px]) to expand to 80% of the viewport.
+ * Uses !important to override Tailwind utility classes and inline styles.
+ */
+
+div[class*="max-w-"]:has(a[href^="/images/"]),
+div[class*="mantine-Container-root"]:has(a[href^="/images/"]) {
+    max-width: 80vw !important;
+    width: 80vw !important;
+    margin-inline: auto !important; /* Centers the container */
+    padding: 0 !important;
+}
+
+/* * GRID LAYOUT DEFINITION
+ * Targets the direct parent of the image cards.
+ * Sets a 5-column grid and ensures content is centered.
+ * 
+ */
+div:has(> .mantine-Paper-root a[href^="/images/"]) {
+    display: grid !important;                          /* Customize default number of columns here!          */
+    grid-template-columns: repeat(5, 1fr) !important;  /* E.g. change parameter to:     repeat(3, 1fr)       */
+    gap: 15px !important;                              /* Number of columns for row influences image height. */
+    
+    justify-content: center !important;
+    
+    /* Overrides default flex/stack behaviors */
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: start !important;
+    
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* * CARD RESET
+ * Resets fixed widths (e.g., 800px) on individual cards so they fit the grid cells.
+ */
+div:has(> .mantine-Paper-root a[href^="/images/"]) > .mantine-Paper-root {
+    width: 100% !important;
+    max-width: 100% !important;
+    aspect-ratio: auto !important;
+    margin: 0 !important;
+}
+
+/* * IMAGE SCALING
+ * Ensures images scale down correctly within the new grid cells.
+ */
+div:has(> .mantine-Paper-root a[href^="/images/"]) > .mantine-Paper-root img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover;
+}
+
+/* * GHOST BLOCK REMOVAL
+ * Hides empty divs (ads/spacers) that disrupt the grid flow.
+ * Position absolute removes them from the layout document flow.
+ */
+div:has(> .mantine-Paper-root a[href^="/images/"]) > *:not(:has(a[href^="/images/"])) {
+    position: absolute !important;
+    width: 0 !important;
+    height: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* * SIDEBAR REMOVAL
+ * Hides the right-hand sidebar (recommendations/ads) to allow true centering
+ * of the main grid within the 80vw container.
+ */
+div[class*="w-[336px]"] {
+    display: none !important;
+}
+
+/* * RESPONSIVENESS
+ * Steps down the column count as screen width decreases to maintain usability.
+ */
+
+/* Large Laptop (1600px) -> 4 Columns */
+@media (max-width: 1600px) {
+    div:has(> .mantine-Paper-root a[href^="/images/"]) {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+}
+
+/* Standard Laptop/Tablet (1300px) -> 3 Columns */
+@media (max-width: 1300px) {
+    div:has(> .mantine-Paper-root a[href^="/images/"]) {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+    /* Increases container width slightly on smaller screens to maximize space */
+    div[class*="max-w-"]:has(a[href^="/images/"]) {
+        width: 90vw !important;
+    }
+}
+
+/* Mobile (800px) -> 2 Columns */
+@media (max-width: 800px) {
+    div:has(> .mantine-Paper-root a[href^="/images/"]) {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    div[class*="max-w-"]:has(a[href^="/images/"]) {
+        width: 95vw !important;
+    }
+}
+}
