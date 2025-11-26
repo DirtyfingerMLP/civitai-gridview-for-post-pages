@@ -20,4 +20,8 @@ Click here to install from UserStyles.world:
 
 #Preview
 
+Gridview (new)
 ![civitai-gridview-posts-preview](https://github.com/user-attachments/assets/4988ce90-9d15-41df-ab88-0a54060dfc79)
+
+Filmstrip view (old)
+![Screenshot 2025-11-26 175304](https://github.com/user-attachments/assets/20978a36-d4b8-4e57-af55-c197ea53082a)
